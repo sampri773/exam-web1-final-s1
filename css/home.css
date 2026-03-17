@@ -1,0 +1,9 @@
+@import url("./base.css");
+
+/* Keep custom CSS minimal — Tailwind handles layout */
+.hero-portrait{
+  border: 1px solid var(--color-red);
+  padding: 10px;
+  border-radius: 9999px;
+}
+

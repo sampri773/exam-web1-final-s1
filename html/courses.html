@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/courses.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <title>Tokimahery — Courses</title>
+</head>
+
+<body class="page-surface" data-page="courses">
+  <header class="sticky top-0 z-50 bg-red-800 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-4">
+      <a class="shrink-0" href="index.html" aria-label="Home">
+        <img class="h-7 sm:h-8" src="../assets/logo.png" alt="Tokimahery logo">
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-8 text-[11px] font-bold tracking-widest text-white/90">
+        <a data-nav class="nav-link" href="index.html">HOME</a>
+        <a data-nav class="nav-link" href="blog.html">BLOG</a>
+        <a data-nav class="nav-link" href="courses.html">COURSES</a>
+        <a data-nav class="nav-link" href="testimonials.html">TESTIMONIALS</a>
+        <a data-nav class="nav-link" href="research.html">RESEARCH</a>
+      </nav>
+
+      <div class="hidden md:flex items-center gap-3 sm:gap-4">
+        <div class="flex items-center gap-2 text-white/90">
+          <input id="globalSearch" class="w-44 lg:w-56 bg-transparent placeholder:text-white/60 text-sm outline-none" type="search"
+            placeholder="Search anything...">
+        </div>
+        <a class="relative text-white/90 hover:text-white transition" href="#" onclick="return false;" aria-label="Cart">
+          <i class="fa-solid fa-basket-shopping"></i>
+          <span id="cartCount"
+            class="hidden absolute -top-2 -right-2 w-5 h-5 rounded-full bg-white text-red-800 text-[11px] font-bold grid place-items-center">0</span>
+        </a>
+      </div>
+
+      <button id="mobileMenuBtn" class="lg:hidden text-white/90 hover:text-white" aria-label="Open menu">
+        <i class="fa-solid fa-bars text-lg"></i>
+      </button>
+    </div>
+
+    <div id="mobileMenuPanel" class="hidden lg:hidden border-t border-white/10">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 grid gap-3 text-[11px] font-bold tracking-widest text-white/90">
+        <a data-nav class="nav-link justify-start" href="index.html">HOME</a>
+        <a data-nav class="nav-link justify-start" href="blog.html">BLOG</a>
+        <a data-nav class="nav-link justify-start" href="courses.html">COURSES</a>
+        <a data-nav class="nav-link justify-start" href="testimonials.html">TESTIMONIALS</a>
+        <a data-nav class="nav-link justify-start" href="research.html">RESEARCH</a>
+        <div class="flex items-center justify-between pt-2">
+          <input id="globalSearchMobile"
+            class="w-full bg-white/10 px-3 py-2 rounded-lg placeholder:text-white/60 text-sm outline-none"
+            type="search" placeholder="Search anything..." onkeydown="if(event.key==='Enter'){document.getElementById('globalSearch').value=this.value;document.getElementById('globalSearch').dispatchEvent(new KeyboardEvent('keydown',{key:'Enter'}));}">
+          <a class="ml-3 relative text-white/90 hover:text-white transition" href="#" onclick="return false;" aria-label="Cart">
+            <i class="fa-solid fa-basket-shopping"></i>
+            <span id="cartCountMobile"
+              class="hidden absolute -top-2 -right-2 w-5 h-5 rounded-full bg-white text-red-800 text-[11px] font-bold grid place-items-center">0</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 pt-14 pb-10">
+      <div class="text-center">
+        <div class="flex justify-center items-center gap-3 text-[11px] font-bold tracking-widest text-stone-600">
+          <span class="h-px w-10 bg-red-700"></span>
+          <span>LEARNING</span>
+          <span class="h-px w-10 bg-red-700"></span>
+        </div>
+        <h1 class="mt-6 text-5xl md:text-6xl font-serif text-slate-900">All courses</h1>
+        <p class="mt-4 text-sm text-stone-600 max-w-xl mx-auto">Online and offline courses: developer, translation and research. Find the one that fits your need and goals.</p>
+      </div>
+    </section>
+
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 pb-6">
+      <div class="rounded-xl bg-white/70 border border-stone-200/70 shadow-sm p-4 md:p-5">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[140px_180px_140px_1fr_240px] gap-3 items-center">
+          <div class="grid gap-1.5">
+            <div class="text-[10px] tracking-widest uppercase text-stone-500">Language</div>
+            <select id="langSelect" class="bg-white/80 border border-stone-200/70 rounded-lg px-3 py-2 text-sm outline-none"></select>
+          </div>
+          <div class="grid gap-1.5">
+            <div class="text-[10px] tracking-widest uppercase text-stone-500">Technology</div>
+            <select id="techSelect" class="bg-white/80 border border-stone-200/70 rounded-lg px-3 py-2 text-sm outline-none"></select>
+          </div>
+          <div class="grid gap-1.5">
+            <div class="text-[10px] tracking-widest uppercase text-stone-500">Level</div>
+            <select id="levelSelect" class="bg-white/80 border border-stone-200/70 rounded-lg px-3 py-2 text-sm outline-none">
+              <option value="">All levels</option>
+              <option value="beginner">beginner</option>
+              <option value="intermediate">intermediate</option>
+              <option value="advanced">advanced</option>
+            </select>
+          </div>
+          <div class="grid gap-1.5">
+            <div class="text-[10px] tracking-widest uppercase text-stone-500">Price range • <span id="priceValue" class="text-stone-700"></span></div>
+            <input id="priceRange" type="range" min="0" step="5000" value="0" class="w-full">
+          </div>
+          <div class="grid gap-1.5">
+            <div class="text-[10px] tracking-widest uppercase text-stone-500">Search</div>
+            <input id="courseSearch" class="bg-white/80 border border-stone-200/70 rounded-lg px-3 py-2 text-sm outline-none" type="search"
+              placeholder="Search for a course...">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 pb-16">
+      <div id="coursesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+    </section>
+
+    <section class="cta-band">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 py-16 text-center">
+        <h3 class="text-3xl md:text-4xl font-serif">Not sure where to start?</h3>
+        <p class="mt-3 text-sm text-white/80">Book a free discovery call and find the course that fits your goals and schedule.</p>
+        <a class="inline-flex mt-7 bg-transparent border border-white/50 hover:border-white text-white text-sm font-semibold px-6 py-3 rounded-lg" href="#">Get in touch</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="../tokimahery.data.js"></script>
+  <script src="../script/script.js"></script>
+</body>
+
+</html>
+
