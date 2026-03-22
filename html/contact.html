@@ -33,11 +33,11 @@
           <input id="globalSearch" class="w-44 lg:w-56 bg-transparent placeholder:text-white/60 text-sm outline-none" type="search"
             placeholder="Search anything...">
         </div>
-        <a class="relative text-white/90 hover:text-white transition" href="courses.html" aria-label="Panier">
+        <button type="button" class="relative text-white/90 hover:text-white transition bg-transparent border-0 p-0 cursor-pointer" data-cart-open aria-label="Ouvrir le panier" aria-haspopup="dialog" aria-expanded="false">
           <i class="fa-solid fa-basket-shopping"></i>
           <span id="cartCount"
             class="hidden absolute -top-2 -right-2 w-5 h-5 rounded-full bg-white text-red-800 text-[11px] font-bold grid place-items-center">0</span>
-        </a>
+        </button>
       </div>
 
       <button id="mobileMenuBtn" class="lg:hidden text-white/90 hover:text-white" type="button" aria-label="Ouvrir le menu">
@@ -57,11 +57,11 @@
           <input id="globalSearchMobile"
             class="w-full bg-white/10 px-3 py-2 rounded-lg placeholder:text-white/60 text-sm outline-none"
             type="search" placeholder="Search anything..." onkeydown="if(event.key==='Enter'){document.getElementById('globalSearch').value=this.value;document.getElementById('globalSearch').dispatchEvent(new KeyboardEvent('keydown',{key:'Enter'}));}">
-          <a class="ml-3 relative text-white/90 hover:text-white transition" href="courses.html" aria-label="Panier">
+          <button type="button" class="ml-3 relative text-white/90 hover:text-white transition bg-transparent border-0 p-0 cursor-pointer" data-cart-open aria-label="Ouvrir le panier" aria-haspopup="dialog" aria-expanded="false">
             <i class="fa-solid fa-basket-shopping"></i>
             <span id="cartCountMobile"
               class="hidden absolute -top-2 -right-2 w-5 h-5 rounded-full bg-white text-red-800 text-[11px] font-bold grid place-items-center">0</span>
-          </a>
+          </button>
         </div>
       </div>
     </div>

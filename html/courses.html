@@ -31,11 +31,11 @@
           <input id="globalSearch" class="w-44 lg:w-56 bg-transparent placeholder:text-white/60 text-sm outline-none" type="search"
             placeholder="Search anything...">
         </div>
-        <a class="relative text-white/90 hover:text-white transition" href="#" onclick="return false;" aria-label="Cart">
+        <button type="button" class="relative text-white/90 hover:text-white transition bg-transparent border-0 p-0 cursor-pointer" data-cart-open aria-label="Open cart" aria-haspopup="dialog" aria-expanded="false">
           <i class="fa-solid fa-basket-shopping"></i>
           <span id="cartCount"
             class="hidden absolute -top-2 -right-2 w-5 h-5 rounded-full bg-white text-red-800 text-[11px] font-bold grid place-items-center">0</span>
-        </a>
+        </button>
       </div>
 
       <button id="mobileMenuBtn" class="lg:hidden text-white/90 hover:text-white" aria-label="Open menu">
@@ -55,11 +55,11 @@
           <input id="globalSearchMobile"
             class="w-full bg-white/10 px-3 py-2 rounded-lg placeholder:text-white/60 text-sm outline-none"
             type="search" placeholder="Search anything..." onkeydown="if(event.key==='Enter'){document.getElementById('globalSearch').value=this.value;document.getElementById('globalSearch').dispatchEvent(new KeyboardEvent('keydown',{key:'Enter'}));}">
-          <a class="ml-3 relative text-white/90 hover:text-white transition" href="#" onclick="return false;" aria-label="Cart">
+          <button type="button" class="ml-3 relative text-white/90 hover:text-white transition bg-transparent border-0 p-0 cursor-pointer" data-cart-open aria-label="Open cart" aria-haspopup="dialog" aria-expanded="false">
             <i class="fa-solid fa-basket-shopping"></i>
             <span id="cartCountMobile"
               class="hidden absolute -top-2 -right-2 w-5 h-5 rounded-full bg-white text-red-800 text-[11px] font-bold grid place-items-center">0</span>
-          </a>
+          </button>
         </div>
       </div>
     </div>
@@ -80,32 +80,43 @@
 
     <section class="max-w-6xl mx-auto px-4 sm:px-6 pb-6">
       <div class="rounded-xl bg-white/70 border border-stone-200/70 shadow-sm p-4 md:p-5">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[140px_180px_140px_1fr_240px] gap-3 items-center">
-          <div class="grid gap-1.5">
+        <div class="flex flex-col xl:flex-row xl:flex-wrap xl:items-end gap-4 xl:gap-3">
+          <div class="grid gap-1.5 shrink-0">
             <div class="text-[10px] tracking-widest uppercase text-stone-500">Language</div>
-            <select id="langSelect" class="bg-white/80 border border-stone-200/70 rounded-lg px-3 py-2 text-sm outline-none"></select>
+            <div id="langFlags" class="flex items-center gap-2 min-h-[38px]" role="group" aria-label="Filter by language">
+              <button type="button" class="lang-flag-btn text-2xl leading-none rounded border-2 border-transparent hover:opacity-90 transition-opacity" data-lang="mg" title="Malagasy" aria-pressed="false"><span aria-hidden="true">🇲🇬</span></button>
+              <button type="button" class="lang-flag-btn text-2xl leading-none rounded border-2 border-transparent hover:opacity-90 transition-opacity" data-lang="fr" title="Français" aria-pressed="false"><span aria-hidden="true">🇫🇷</span></button>
+              <button type="button" class="lang-flag-btn text-2xl leading-none rounded border-2 border-transparent hover:opacity-90 transition-opacity" data-lang="en" title="English" aria-pressed="false"><span aria-hidden="true">🇺🇸</span></button>
+            </div>
           </div>
-          <div class="grid gap-1.5">
+          <div class="grid gap-1.5 min-w-[10rem] flex-1 xl:max-w-[200px]">
             <div class="text-[10px] tracking-widest uppercase text-stone-500">Technology</div>
-            <select id="techSelect" class="bg-white/80 border border-stone-200/70 rounded-lg px-3 py-2 text-sm outline-none"></select>
+            <select id="techSelect" class="bg-white/80 border border-stone-200/70 rounded-lg px-3 py-2 text-sm outline-none w-full"></select>
           </div>
-          <div class="grid gap-1.5">
+          <div class="grid gap-1.5 min-w-[10rem] flex-1 xl:max-w-[160px]">
             <div class="text-[10px] tracking-widest uppercase text-stone-500">Level</div>
-            <select id="levelSelect" class="bg-white/80 border border-stone-200/70 rounded-lg px-3 py-2 text-sm outline-none">
+            <select id="levelSelect" class="bg-white/80 border border-stone-200/70 rounded-lg px-3 py-2 text-sm outline-none w-full">
               <option value="">All levels</option>
               <option value="beginner">beginner</option>
               <option value="intermediate">intermediate</option>
               <option value="advanced">advanced</option>
             </select>
           </div>
-          <div class="grid gap-1.5">
-            <div class="text-[10px] tracking-widest uppercase text-stone-500">Price range • <span id="priceValue" class="text-stone-700"></span></div>
-            <input id="priceRange" type="range" min="0" step="5000" value="0" class="w-full">
+          <div class="grid gap-1.5 flex-[1.2] min-w-[200px] xl:max-w-[280px]">
+            <div class="text-[10px] tracking-widest uppercase text-stone-500">Price range</div>
+            <div id="priceRangeLabel" class="text-sm font-medium text-red-800 tabular-nums">0 Ar — 0 Ar</div>
+            <div class="dual-range-stack space-y-2">
+              <input id="priceRangeMin" type="range" min="0" step="5000" value="0" class="w-full course-range course-range-min" aria-label="Minimum price">
+              <input id="priceRangeMax" type="range" min="0" step="5000" value="0" class="w-full course-range course-range-max" aria-label="Maximum price">
+            </div>
           </div>
-          <div class="grid gap-1.5">
+          <div class="grid gap-1.5 flex-1 min-w-[140px] xl:max-w-[220px]">
             <div class="text-[10px] tracking-widest uppercase text-stone-500">Search</div>
-            <input id="courseSearch" class="bg-white/80 border border-stone-200/70 rounded-lg px-3 py-2 text-sm outline-none" type="search"
-              placeholder="Search for a course...">
+            <input id="courseSearch" class="bg-white/80 border border-stone-200/70 rounded-lg px-3 py-2 text-sm outline-none w-full" type="search"
+              placeholder="Keywords..." autocomplete="off">
+          </div>
+          <div class="flex items-end shrink-0 pb-0.5 xl:ml-auto">
+            <button type="button" id="filtersClearAll" class="text-[11px] font-bold tracking-widest text-stone-500 hover:text-red-800 uppercase bg-transparent border-0 cursor-pointer py-2 px-1">Clear all</button>
           </div>
         </div>
       </div>

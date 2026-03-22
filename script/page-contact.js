@@ -8,15 +8,15 @@
  */
 
 function initContactPage() {
-  var form = $("#contactForm");
-  var feedback = $("#contactFeedback");
+  let form = $("#contactForm");
+  let feedback = $("#contactFeedback");
   if (!form) return;
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
-    var name = $("#contactName") && $("#contactName").value.trim();
-    var email = $("#contactEmail") && $("#contactEmail").value.trim();
-    var message = $("#contactMessage") && $("#contactMessage").value.trim();
+    let name = $("#contactName") && $("#contactName").value.trim();
+    let email = $("#contactEmail") && $("#contactEmail").value.trim();
+    let message = $("#contactMessage") && $("#contactMessage").value.trim();
 
     if (!name || !email || !message) {
       if (feedback) {

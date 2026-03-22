@@ -1,7 +1,20 @@
 @import url("./base.css");
 
-/* Range input accents */
-input[type="range"]{
+/* Double curseur prix (deux pistes comme sur la maquette) */
+.course-range{
   accent-color: var(--color-red);
+  height: 6px;
+}
+
+.course-range-min{
+  opacity: 0.85;
+}
+
+.course-range-max{
+  opacity: 1;
+}
+
+.dual-range-stack input[type="range"]{
+  display: block;
 }
 

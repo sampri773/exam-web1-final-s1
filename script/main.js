@@ -9,7 +9,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   initCommon();
 
-  var page = document.body.getAttribute("data-page");
+  let page = document.body.getAttribute("data-page");
 
   if (page === "home" && typeof renderHome === "function") {
     renderHome();
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
     renderTestimonials();
   }
   if (page === "research" && typeof renderResearch === "function") {
-    renderResearch();
+    renderResearch(data.papers);
   }
   if (page === "contact" && typeof initContactPage === "function") {
     initContactPage();
