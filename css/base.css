@@ -1,3 +1,7 @@
+/**
+ * base.css — Styles de BASE communs à tout le site (couleurs, polices, fond).
+ * Chaque page importe ce fichier via son propre CSS (home.css, blog.css, …).
+ */
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,200..900;1,9..40,200..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 

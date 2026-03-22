@@ -1,7 +1,7 @@
 const data = {
 
   // -------------------------
-  // HOME
+  // HOME — textes affichés sur index.html
   // -------------------------
 
   aboutMe_part1: `I am a PhD researcher studying complex systems through agent-based modeling and simulation. However, teaching, is my Ikigai, it is driven by a deep commitment to helping students grow beyond what they thought possible.`,
