@@ -18,15 +18,15 @@ function renderHome() {
     for (let i = 0; i < data.overview.length; i++) {
       let o = data.overview[i];
       let block = document.createElement("div");
-      block.className = "text-center";
+      block.className = "flex flex-col gap-0";
 
-      let num = document.createElement("div");
-      num.className = "text-3xl md:text-4xl font-semibold text-slate-900";
+      let num = document.createElement("h3");
+      num.className = " text-[#b91c1c] font-bold";
       num.textContent = safeText(o.number);
 
-      let label = document.createElement("div");
+      let label = document.createElement("p");
       label.className =
-        "text-[11px] tracking-widest uppercase text-stone-500 mt-1";
+        "text-[0.8rem] uppercase text-[#a8a29e] ";
       label.textContent = safeText(o.label);
 
       block.appendChild(num);
@@ -42,25 +42,25 @@ function renderHome() {
       let e = data.experiences[i];
       let row = document.createElement("div");
       row.className =
-        "grid grid-cols-1 md:grid-cols-[180px_1fr] gap-4 py-7 border-t border-stone-200/70";
+        "flex flex-col gap-2 py-5 px-3 border-l-[1.5px] border-[#e5e0d8] hover:border-[#b91c1c] duration-500 ";
 
       let yearCol = document.createElement("div");
       yearCol.className =
-        "text-[11px] tracking-widest uppercase text-stone-500";
+        "text-[0.8rem] text-[#b91c1c] tracking-widest uppercase font-bold";
       yearCol.textContent = safeText(e.year);
 
       let mainCol = document.createElement("div");
 
       let role = document.createElement("div");
-      role.className = "font-semibold text-slate-900";
+      role.className = "font-semibold text-[1rem] text-[#1a1a1a] ";
       role.textContent = safeText(e.role);
 
       let org = document.createElement("div");
-      org.className = "text-sm text-stone-600";
+      org.className = "text-[#a8a29e] uppercase text-[0.7rem]";
       org.textContent = safeText(e.org);
 
-      let desc = document.createElement("div");
-      desc.className = "text-sm text-stone-600 mt-3 leading-relaxed";
+      let desc = document.createElement("p");
+      desc.className = " mt-3 leading-relaxed";
       desc.textContent = safeText(e.desc);
 
       mainCol.appendChild(role);
@@ -80,20 +80,21 @@ function renderHome() {
       let c = data.homeCourses[i];
       let card = document.createElement("div");
       card.className =
-        "rounded-xl bg-white/80 border border-stone-200/70 p-5 shadow-sm";
+        "flex flex-col justify-between items-start gap-5 bg-[#ffffff] rounded-lg px-5 py-5 shadow-[0px_0px_2px_#e5e0d8] relative top-0 hover:top-[-0.5vh] duration-300";
 
       let tag = document.createElement("div");
       tag.className =
-        "text-[11px] tracking-widest uppercase text-stone-500";
+        "text-[0.6rem] text-[#f9f6f1] rounded-3xl bg-[#991b1b] px-2 py-[0.1vh] ";
       tag.textContent = safeText(c.tag);
 
-      let title = document.createElement("div");
-      title.className = "font-semibold text-slate-900 mt-2";
+      let title = document.createElement("h3");
+      title.className = "font-bold leading-[1rem] text-[0.9rem] ";
       title.textContent = safeText(c.title);
 
-      let foot = document.createElement("div");
+
+      let foot = document.createElement("footer");
       foot.className =
-        "text-sm text-stone-600 mt-4 flex items-center justify-between";
+        "flex w-full justify-between text-[#a8a29e] text-[0.7rem] border-t-[1.5px] pt-2";
       let spanMode = document.createElement("span");
       spanMode.textContent = safeText(c.mode);
       let spanDur = document.createElement("span");

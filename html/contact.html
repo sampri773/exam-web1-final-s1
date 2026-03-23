@@ -5,65 +5,51 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../css/contact.css">
-  <link rel="stylesheet" href="../css/output.css"
+  <link rel="stylesheet" href="../css/output.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <title>Tokimahery — Contact &amp; collaboration</title>
 </head>
 
-<!-- data-page="contact" : utilisé par main.js pour appeler initContactPage() -->
+
+
 <body class="page-surface" data-page="contact">
-  <!-- Même en-tête que les autres pages (copié pour rester simple pour un débutant) -->
-  <header class="sticky top-0 z-50 bg-red-800 shadow-sm">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-4">
-      <a class="shrink-0" href="index.html" aria-label="Accueil">
-        <img class="h-7 sm:h-8" src="../assets/logo.png" alt="Logo Tokimahery">
-      </a>
+  <header id="pcNav"
+    class="flex justify-between items-center sticky top-0 z-50 bg-[#991b1b] shadow-sm px-[1%] py-[0.6%]">
+    <img src="../assets/logo.png" alt="" class="w-32">
 
-      <nav class="hidden lg:flex items-center gap-6 xl:gap-8 text-[11px] font-bold tracking-widest text-white/90">
-        <a data-nav class="nav-link" href="index.html">HOME</a>
-        <a data-nav class="nav-link" href="blog.html">BLOG</a>
-        <a data-nav class="nav-link" href="courses.html">COURSES</a>
-        <a data-nav class="nav-link" href="testimonials.html">TESTIMONIALS</a>
-        <a data-nav class="nav-link" href="research.html">RESEARCH</a>
-        <a data-nav class="nav-link" href="contact.html">CONTACT</a>
-      </nav>
+    <input type="checkbox" id="menu-toggle" class="peer hidden" />
+    <nav class="hidden lg:flex items-center gap-8 text-[0.6rem] font-semibold tracking-widest text-[#ffff] 
+                        /* Style Mobile quand coché */
+                        peer-checked:flex flex-col lg:flex-row 
+                        absolute lg:static top-full left-0 w-full lg:w-auto 
+                        bg-[#991b1b] lg:bg-transparent p-6 lg:p-0 z-50">
 
-      <div class="hidden md:flex items-center gap-3 sm:gap-4">
-        <div class="flex items-center gap-2 text-white/90">
-          <input id="globalSearch" class="w-44 lg:w-56 bg-transparent placeholder:text-white/60 text-sm outline-none" type="search"
-            placeholder="Search anything...">
-        </div>
-        <button type="button" class="relative text-white/90 hover:text-white transition bg-transparent border-0 p-0 cursor-pointer" data-cart-open aria-label="Ouvrir le panier" aria-haspopup="dialog" aria-expanded="false">
-          <i class="fa-solid fa-basket-shopping"></i>
-          <span id="cartCount"
-            class="hidden absolute -top-2 -right-2 w-5 h-5 rounded-full bg-white text-red-800 text-[11px] font-bold grid place-items-center">0</span>
-        </button>
+      <a data-nav class="nav-link" href="index.html">HOME</a>
+      <a data-nav class="nav-link" href="blog.html">BLOG</a>
+      <a data-nav class="nav-link" href="courses.html">COURSES</a>
+      <a data-nav class="nav-link" href="testimonials.html">TESTIMONIALS</a>
+      <a data-nav class="nav-link" href="research.html">RESEARCH</a>
+      <a data-nav class="nav-link" href="contact.html">CONTACT</a>
+    </nav>
+
+    <div class="flex gap-5 items-center">
+      <div class="hidden lg:flex items-center gap-2">
+        <input id="globalSearch"
+          class="bg-transparent placeholder:text-[#ffff] placeholder:opacity-60 text-[0.6rem] text-[#ffff] outline-none"
+          type="search" placeholder="Search anything...">
       </div>
 
-      <button id="mobileMenuBtn" class="lg:hidden text-white/90 hover:text-white" type="button" aria-label="Ouvrir le menu">
-        <i class="fa-solid fa-bars text-lg"></i>
+      <button type="button"
+        class="relative text-white/90 hover:text-white transition bg-transparent border-0 p-0 cursor-pointer"
+        data-cart-open aria-label="Open cart" aria-haspopup="dialog" aria-expanded="false">
+        <i class="fa-solid fa-basket-shopping"></i>
+        <span id="cartCount"
+          class="hidden absolute -top-2 -right-2 w-5 h-5 rounded-full bg-white text-red-800 text-[11px] font-bold grid place-items-center">0</span>
       </button>
-    </div>
 
-    <div id="mobileMenuPanel" class="hidden lg:hidden border-t border-white/10">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 grid gap-3 text-[11px] font-bold tracking-widest text-white/90">
-        <a data-nav class="nav-link justify-start" href="index.html">HOME</a>
-        <a data-nav class="nav-link justify-start" href="blog.html">BLOG</a>
-        <a data-nav class="nav-link justify-start" href="courses.html">COURSES</a>
-        <a data-nav class="nav-link justify-start" href="testimonials.html">TESTIMONIALS</a>
-        <a data-nav class="nav-link justify-start" href="research.html">RESEARCH</a>
-        <a data-nav class="nav-link justify-start" href="contact.html">CONTACT</a>
-        <div class="flex items-center justify-between pt-2">
-          <input id="globalSearchMobile"
-            class="w-full bg-white/10 px-3 py-2 rounded-lg placeholder:text-white/60 text-sm outline-none"
-            type="search" placeholder="Search anything..." onkeydown="if(event.key==='Enter'){document.getElementById('globalSearch').value=this.value;document.getElementById('globalSearch').dispatchEvent(new KeyboardEvent('keydown',{key:'Enter'}));}">
-          <button type="button" class="ml-3 relative text-white/90 hover:text-white transition bg-transparent border-0 p-0 cursor-pointer" data-cart-open aria-label="Ouvrir le panier" aria-haspopup="dialog" aria-expanded="false">
-            <i class="fa-solid fa-basket-shopping"></i>
-            <span id="cartCountMobile"
-              class="hidden absolute -top-2 -right-2 w-5 h-5 rounded-full bg-white text-red-800 text-[11px] font-bold grid place-items-center">0</span>
-          </button>
-        </div>
-      </div>
+      <label for="menu-toggle" class="text-[#ffff] lg:hidden cursor-pointer text-xl select-none">
+        ☰
+      </label>
     </div>
   </header>
 
@@ -75,27 +61,33 @@
       </div>
       <h1 class="mt-5 text-4xl md:text-5xl font-serif text-slate-900 leading-tight">Contact</h1>
       <p class="mt-4 text-sm text-stone-600 leading-relaxed">
-        Une question, un projet ou une idée de collaboration ? Écrivez un message ci-dessous. Ce formulaire est une démonstration : sans serveur, les données ne partent pas par e-mail (voir les commentaires dans <code class="text-xs bg-stone-100 px-1 rounded">page-contact.js</code>).
+        Une question, un projet ou une idée de collaboration ? Écrivez un message ci-dessous. Ce formulaire est une
+        démonstration : sans serveur, les données ne partent pas par e-mail (voir les commentaires dans <code
+          class="text-xs bg-stone-100 px-1 rounded">page-contact.js</code>).
       </p>
 
       <!-- Formulaire : id utilisés par page-contact.js (contactForm, contactName, …) -->
-      <form id="contactForm" class="mt-10 space-y-6 rounded-xl bg-white/80 border border-stone-200/70 p-6 md:p-8 shadow-sm">
+      <form id="contactForm"
+        class="mt-10 space-y-6 rounded-xl bg-white/80 border border-stone-200/70 p-6 md:p-8 shadow-sm">
         <div>
           <label class="block text-xs font-bold tracking-widest uppercase text-stone-600" for="contactName">Nom</label>
           <input id="contactName" name="name" type="text" required autocomplete="name"
             class="mt-2 w-full rounded-lg border border-stone-200 bg-white px-3 py-2 text-sm outline-none focus:border-red-700 focus:ring-1 focus:ring-red-700">
         </div>
         <div>
-          <label class="block text-xs font-bold tracking-widest uppercase text-stone-600" for="contactEmail">E-mail</label>
+          <label class="block text-xs font-bold tracking-widest uppercase text-stone-600"
+            for="contactEmail">E-mail</label>
           <input id="contactEmail" name="email" type="email" required autocomplete="email"
             class="mt-2 w-full rounded-lg border border-stone-200 bg-white px-3 py-2 text-sm outline-none focus:border-red-700 focus:ring-1 focus:ring-red-700">
         </div>
         <div>
-          <label class="block text-xs font-bold tracking-widest uppercase text-stone-600" for="contactMessage">Message</label>
+          <label class="block text-xs font-bold tracking-widest uppercase text-stone-600"
+            for="contactMessage">Message</label>
           <textarea id="contactMessage" name="message" rows="5" required
             class="mt-2 w-full rounded-lg border border-stone-200 bg-white px-3 py-2 text-sm outline-none focus:border-red-700 focus:ring-1 focus:ring-red-700 resize-y"></textarea>
         </div>
-        <button type="submit" class="w-full sm:w-auto bg-red-700 hover:bg-red-800 text-white text-sm font-semibold px-6 py-3 rounded-lg">
+        <button type="submit"
+          class="w-full sm:w-auto bg-red-700 hover:bg-red-800 text-white text-sm font-semibold px-6 py-3 rounded-lg">
           Envoyer
         </button>
         <p id="contactFeedback" class="hidden text-sm" role="status"></p>
@@ -103,7 +95,7 @@
     </section>
   </main>
 
-  <!-- Pas besoin de tokimahery.data.js sur cette page (aucune liste à remplir depuis les données) -->
+  
   <script src="../script/common.js"></script>
   <script src="../script/page-contact.js"></script>
   <script src="../script/main.js"></script>

@@ -4,6 +4,7 @@
 * {
     padding: 0;
     margin: 0;
+    scroll-behavior: smooth;
 }
 
 :root {
@@ -25,6 +26,21 @@
     --police-2: DM Sans;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--police-1);
+    color: #1a1a1a;
+    font-weight: 500;
+}
+
+p{
+    font-size: 0.8rem;
+    color: #78716c;
+}
 #barre-rouge {
     display: flex;
     flex-direction: row;
@@ -88,62 +104,4 @@
 #recherche input::placeholder{
     color: var(--color-bg-white);
     opacity: 0.5;
-}
-
-#acceuil {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
-    gap: 5vw;
-    padding: 15%;
-}
-
-#acceuil img{
-    border-radius: 50%;
-    width: 20vw;
-    border: solid 1px var(--color-red);
-    padding: 1vh;
-}
-#acceuil div{
-    box-sizing: content-box;
-    line-height: 0;
-    border-radius: 50%;
-}
-
-h1{
-    font-size: 3rem;
-    font-weight: lighter;
-}
-h1 span{
-    border: transparent;
-    color: var(--color-red);
-    font-family: var(--police-1);
-    font-style: italic;
-}
-
-#acceuil article{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 50%;
-}
-
-#acceuil article header{
-    display: flex;
-    flex-direction: column;
-    gap: 2vh;
-}
-#acceuil article header div{
-    display: flex;
-    flex-direction: row;
-    font-size: 0.6rem;
-    font-family: var(--police-2);
-    font-weight: bold;
-    gap: 0.5vw;
-}
-
-#acceuil article header hr{
-    width: 3vw;
-    border: solid 0.5px var(--color-red);
 }
