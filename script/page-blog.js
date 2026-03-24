@@ -1,136 +1,164 @@
-/**
- * =============================================================================
- * page-blog.js — Liste des articles, archives et vidéos YouTube (blog.html)
- * =============================================================================
- */
+let currentPage = 1;
+const postsPerPage = 5;
 
 function renderBlog() {
   let list = $("#postsList");
-  if (list && Array.isArray(data.posts)) {
-    let posts = data.posts.slice().sort(function (a, b) {
-      return new Date(b.creationDate) - new Date(a.creationDate);
+  if (!list || !Array.isArray(data.posts)) return;
+
+  let allPosts = data.posts.slice().sort((a, b) => new Date(b.creationDate) - new Date(a.creationDate));
+
+  const startIndex = (currentPage - 1) * postsPerPage;
+  const endIndex = startIndex + postsPerPage;
+  const postsToShow = allPosts.slice(startIndex, endIndex);
+
+  clearElement(list);
+
+  postsToShow.forEach(p => {
+    let article = document.createElement("article");
+    article.className = "shadow-[0px_5px_10px_#f0ece4] rounded-lg p-5 flex gap-5 mb-6";
+
+    let img = document.createElement("img");
+    img.src = safeText(p.thumbnail);
+    img.className = "hidden rounded-lg md:block md:w-[15vw] object-cover";
+
+    let contentWrapper = document.createElement("div");
+    contentWrapper.className = "flex flex-col justify-between gap-5";
+
+    let textGroup = document.createElement("div");
+    textGroup.className = "flex flex-col gap-2";
+
+    let h2 = document.createElement("h2");
+    h2.className = "text-[1.3rem] font-semibold text-[#b91c1c]";
+    h2.textContent = safeText(p.title);
+
+    let dateEl = document.createElement("div");
+    dateEl.className = "font-semibold text-[0.9rem] text-[#1a1a1a]";
+    dateEl.textContent = p.creationDate ? new Date(p.creationDate).toLocaleDateString("fr-FR", { year: "numeric", month: "long", day: "numeric" }) : "";
+
+    let desc = document.createElement("p");
+    desc.className = "text-sm text-stone-700";
+    desc.textContent = safeText(p.description);
+
+    textGroup.append(h2, dateEl, desc);
+
+    let tagsGroup = document.createElement("div");
+    tagsGroup.className = "flex gap-3";
+    (p.tags || []).slice(0, 4).forEach(tag => {
+      let span = document.createElement("span");
+      span.className = "rounded-full px-2 py-0.5 bg-blue-300 text-[0.6rem] text-white";
+      span.textContent = safeText(tag);
+      tagsGroup.appendChild(span);
     });
 
-    clearElement(list);
+    contentWrapper.append(textGroup, tagsGroup);
+    article.append(img, contentWrapper);
+    list.appendChild(article);
+  });
 
-    for (let i = 0; i < posts.length; i++) {
-      let p = posts[i];
-      let article = document.createElement("article");
-      article.className =
-        "rounded-xl bg-white/85 border border-stone-200/70 shadow-sm overflow-hidden";
+  renderPagination(allPosts.length);
+  renderSidebar();
+}
 
-      let grid = document.createElement("div");
-      grid.className = "grid grid-cols-1 md:grid-cols-[220px_1fr]";
+function renderPagination(totalItems) {
+  const paginationContainer = document.querySelector("#pagination");
+  if (!paginationContainer) return;
 
-      let img = document.createElement("img");
-      img.src = safeText(p.thumbnail);
-      img.alt = "";
-      img.className = "w-full h-44 md:h-full object-cover";
+  const totalPages = Math.ceil(totalItems / postsPerPage);
+  paginationContainer.innerHTML = "";
 
-      let body = document.createElement("div");
-      body.className = "p-6";
+  const nav = document.createElement("nav");
+  nav.className = "flex justify-center items-center gap-4 mt-10";
 
-      let dateStr = "";
-      if (p.creationDate) {
-        dateStr = new Date(p.creationDate).toLocaleDateString("fr-FR", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        });
-      }
-
-      let dateEl = document.createElement("div");
-      dateEl.className =
-        "text-[11px] tracking-widest uppercase text-stone-500";
-      dateEl.textContent = safeText(dateStr);
-
-      let h2 = document.createElement("h2");
-      h2.className =
-        "mt-2 text-xl md:text-2xl font-semibold font-serif text-slate-900";
-      h2.textContent = safeText(p.title);
-
-      let desc = document.createElement("div");
-      desc.className = "mt-3 text-sm text-stone-700 leading-relaxed";
-      desc.textContent = safeText(p.description);
-
-      let tagsRow = document.createElement("div");
-      tagsRow.className = "mt-5 flex flex-wrap gap-2";
-      let tagList = (p.tags || []).slice(0, 4);
-      for (let j = 0; j < tagList.length; j++) {
-        let span = document.createElement("span");
-        span.className =
-          "pill rounded-full px-3 py-1 text-[10px] tracking-widest uppercase text-stone-600";
-        span.textContent = safeText(tagList[j]);
-        tagsRow.appendChild(span);
-      }
-
-      body.appendChild(dateEl);
-      body.appendChild(h2);
-      body.appendChild(desc);
-      body.appendChild(tagsRow);
-
-      grid.appendChild(img);
-      grid.appendChild(body);
-      article.appendChild(grid);
-      list.appendChild(article);
-    }
+  if (currentPage > 1) {
+    nav.appendChild(createPageBtn("← Prev", () => { currentPage--; renderBlog(); }));
   }
 
+  for (let i = 1; i <= totalPages; i++) {
+    const btn = createPageBtn(i, () => { currentPage = i; renderBlog(); });
+    if (i === currentPage) {
+      btn.className = "px-3 py-1 text-sm flex items-center justify-center rounded-lg bg-red-700 text-white text-sm font-semibold";
+    }
+    nav.appendChild(btn);
+  }
+
+  if (currentPage < totalPages) {
+    nav.appendChild(createPageBtn("Next →", () => { currentPage++; renderBlog(); }));
+  }
+
+  paginationContainer.appendChild(nav);
+}
+
+function createPageBtn(label, onClick) {
+  const btn = document.createElement("button");
+  btn.className = "px-3 py-1 text-sm font-semibold text-stone-500 hover:text-red-700 transition rounded-lg border-[1.5px] border-[#f0ece4] ";
+  btn.textContent = label;
+  btn.onclick = (e) => {
+    e.preventDefault();
+    onClick();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+  return btn;
+}
+
+function renderSidebar() {
   let archives = $("#archivesList");
   if (archives && Array.isArray(data.archives)) {
     clearElement(archives);
-    for (let i = 0; i < data.archives.length; i++) {
-      let a = data.archives[i];
+    data.archives.forEach(a => {
       let row = document.createElement("div");
-      row.className = "flex items-center justify-between text-sm py-2";
-
-      let label = document.createElement("span");
-      label.className = "text-stone-700";
-      label.textContent = safeText(a.label);
-
-      let count = document.createElement("span");
-      count.className = "text-stone-500";
-      count.textContent = safeText(a.count);
-
-      row.appendChild(label);
-      row.appendChild(count);
+      row.className = "flex items-center justify-between text-[0.7rem] font-semibold text-[#78716c]";
+      row.innerHTML = `<span class="py-[0.5vh]">${safeText(a.label)}</span><span>${safeText(a.count)}</span>`;
       archives.appendChild(row);
-    }
+    });
   }
 
-  let yt = $("#youtubeList");
+  var yt = $("#youtubeList");
   if (yt && Array.isArray(data.youtubeVideos)) {
-    clearElement(yt);
-    for (let i = 0; i < data.youtubeVideos.length; i++) {
-      let v = data.youtubeVideos[i];
-      let link = document.createElement("a");
-      link.className =
-        "block rounded-lg overflow-hidden border border-stone-200/70 bg-white/80 hover:shadow-sm transition";
-      link.href =
-        "https://www.youtube.com/watch?v=" + encodeURIComponent(safeText(v.id));
-      link.target = "_blank";
-      link.rel = "noreferrer";
-
-      let thumbWrap = document.createElement("div");
-      thumbWrap.className = "aspect-video bg-stone-100";
-
-      let thumb = document.createElement("img");
-      thumb.className = "w-full h-full object-cover";
-      thumb.alt = "";
-      thumb.src =
-        "https://img.youtube.com/vi/" +
-        encodeURIComponent(safeText(v.id)) +
-        "/hqdefault.jpg";
-
-      thumbWrap.appendChild(thumb);
-
-      let title = document.createElement("div");
-      title.className = "p-3 text-sm font-semibold text-slate-900";
-      title.textContent = safeText(v.title);
-
-      link.appendChild(thumbWrap);
-      link.appendChild(title);
-      yt.appendChild(link);
-    }
+    yt.innerHTML = data.youtubeVideos
+      .map(function (v) {
+        return (
+          '<a class="" href="https://www.youtube.com/watch?v=' +
+          safeText(v.id) +
+          '" target="_blank" rel="noreferrer">' +
+          '<div class="aspect-video">' +
+          '<img class="w-full h-full object-cover rounded-lg" alt="" src="https://img.youtube.com/vi/' +
+          safeText(v.id) +
+          '/hqdefault.jpg">' +
+          "</div>" +
+          '<div class="p-3 text-sm font-semibold">' +
+          safeText(v.title) +
+          "</div>" +
+          "</a>"
+        );
+      })
+      .join("");
   }
 }
+
+function handleSubscribe() {
+  const emailInput = document.querySelector("#subscribeEmail");
+  const subscribeBtn = document.querySelector("#subscribeBtn");
+  if (!emailInput || !subscribeBtn) return;
+
+  const email = emailInput.value.trim();
+  if (email === "" || !email.includes("@")) {
+    alert("Veuillez entrer une adresse email valide.");
+    return;
+  }
+
+  subscribeBtn.disabled = true;
+  const originalText = subscribeBtn.textContent;
+  subscribeBtn.textContent = "You have been subscribed !";
+
+  setTimeout(() => {
+    subscribeBtn.disabled = false;
+    subscribeBtn.textContent = originalText;
+    emailInput.value = "";
+  }, 3000);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderBlog();
+  const btn = document.querySelector("#subscribeBtn");
+  if (btn) btn.addEventListener("click", handleSubscribe);
+});

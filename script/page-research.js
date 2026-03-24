@@ -8,7 +8,6 @@ function renderResearch(papers = []) {
   const container = document.querySelector("#papersList");
   if (!container) return;
 
-  // Vider le conteneur proprement
   while (container.firstChild) {
     container.removeChild(container.firstChild);
   }
@@ -22,89 +21,59 @@ function renderResearch(papers = []) {
   }
 
   papers.forEach(paper => {
-    // Article principal
     const article = document.createElement("article");
-    article.className = "py-10 border-t border-stone-200/70";
+    article.className = "rounded-lg border-[1.5px] border-[#f0ece4] px-[2%] py-[3%] relative top-0 hover:top-[-0.5vh] hover:shadow-[0px_5px_10px_#e5e0d8] duration-300 flex flex-col gap-3";
 
-    // Ligne metadata (journal • date)
-    const metaDiv = document.createElement("div");
-    metaDiv.className = "flex flex-wrap items-center gap-3 text-[11px] tracking-widest uppercase text-stone-500";
+    const metaContainer = document.createElement("div");
+    metaContainer.className = "flex justify-between items-center text-[0.6rem] text-[#a8a29e] ";
 
-    if (paper.journal) {
-      const journalSpan = document.createElement("span");
-      journalSpan.textContent = safeText(paper.journal);
-      metaDiv.appendChild(journalSpan);
-    }
-
-    const dateStr = paper.publishedDate
-      ? new Date(paper.publishedDate).toLocaleDateString("fr-FR", { year: "numeric", month: "long" })
-      : "";
-
-    if (dateStr && paper.journal) {
-      const sep = document.createElement("span");
-      sep.className = "opacity-40";
-      sep.textContent = "•";
-      metaDiv.appendChild(sep);
-    }
-
-    if (dateStr) {
-      const dateSpan = document.createElement("span");
-      dateSpan.textContent = safeText(dateStr);
-      metaDiv.appendChild(dateSpan);
-    }
-
-    article.appendChild(metaDiv);
-
-    // Titre
-    const h2 = document.createElement("h2");
-    h2.className = "mt-3 text-2xl md:text-3xl font-semibold font-serif text-slate-900";
-    h2.textContent = safeText(paper.title || "");
-    article.appendChild(h2);
-
-    // Abstract
-    const abstractDiv = document.createElement("div");
-    abstractDiv.className = "mt-4 text-sm text-stone-700 leading-relaxed";
-    abstractDiv.textContent = safeText(paper.abstract || "");
-    article.appendChild(abstractDiv);
-
-    // Auteurs
-    const authorsDiv = document.createElement("div");
-    authorsDiv.className = "mt-5 text-sm text-stone-600";
-
-    const authorsStrong = document.createElement("span");
-    authorsStrong.className = "font-semibold text-slate-900";
-    authorsStrong.textContent = "Auteurs : ";
-    authorsDiv.appendChild(authorsStrong);
-
-    const authorsText = document.createTextNode(safeText((paper.authors || []).join(", ")));
-    authorsDiv.appendChild(authorsText);
-
-    article.appendChild(authorsDiv);
-
-    // Tags
     const tagsDiv = document.createElement("div");
-    tagsDiv.className = "mt-6 flex flex-wrap gap-2";
-
+    tagsDiv.className = "flex flex-wrap gap-2";
     (paper.tags || []).forEach(tag => {
       const span = document.createElement("span");
-      span.className = "pill rounded-full px-3 py-1 text-[11px] tracking-widest uppercase text-stone-600";
+      span.className = "rounded-3xl p-[1px] px-[0.5vw] bg-[#f9f6f1] ";
       span.textContent = safeText(tag);
       tagsDiv.appendChild(span);
     });
+    metaContainer.appendChild(tagsDiv);
 
-    article.appendChild(tagsDiv);
+    // Date
+    const dateStr = paper.publishedDate
+      ? new Date(paper.publishedDate).toLocaleDateString("fr-FR", { year: "numeric", month: "long" })
+      : "";
+    
+    const dateSpan = document.createElement("span");
+    dateSpan.className = "text-right";
+    dateSpan.textContent = safeText(dateStr);
+    metaContainer.appendChild(dateSpan);
+    
+    article.appendChild(metaContainer);
 
-    // Lien PDF
+    const h2 = document.createElement("h2");
+    h2.className = "";
+    h2.textContent = safeText(paper.title || "");
+    article.appendChild(h2);
+
+    
+    const authorsDiv = document.createElement("div");
+    authorsDiv.className = "text-[#a8a29e] text-[0.7rem]";
+    authorsDiv.textContent = safeText((paper.authors || []).join(", "));
+    article.appendChild(authorsDiv);
+
+    const abstractDiv = document.createElement("p");
+    abstractDiv.className = "font-semibold";
+    abstractDiv.textContent = safeText(paper.abstract || "");
+    article.appendChild(abstractDiv);
+
+
     const linkDiv = document.createElement("div");
-    linkDiv.className = "mt-6";
 
     const a = document.createElement("a");
-    a.className = "inline-flex items-center gap-2 text-red-800 font-semibold text-sm tracking-wide hover:underline";
+    a.className = "underline hover:opacity-50 duration-300 border-t-[1px] border-[#f0ece4] flex pt-3 font-semibold text-[0.8rem] text-[#b91c1c] ";
     a.href = safeText(paper.pdfUrl || paper.url || "#");
     a.target = "_blank";
     a.rel = "noopener noreferrer";
-
-    a.textContent = "LIRE LE PDF ";
+    a.textContent = "READ PDF ";
 
     const arrow = document.createElement("span");
     arrow.setAttribute("aria-hidden", "true");
@@ -114,7 +83,6 @@ function renderResearch(papers = []) {
     linkDiv.appendChild(a);
     article.appendChild(linkDiv);
 
-    // Ajout final de l'article au conteneur
     container.appendChild(article);
   });
 }

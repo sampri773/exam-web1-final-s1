@@ -7,18 +7,17 @@
   <link rel="stylesheet" href="../css/blog.css">
   <link rel="stylesheet" href="../css/output.css">
   <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"> 
   <title>Tokimahery — Blog</title>
 </head>
 
 <body class="page-surface" data-page="blog">
   <header id="pcNav"
     class="flex justify-between items-center sticky top-0 z-50 bg-[#991b1b] shadow-sm px-[1%] py-[0.6%]">
-    <img src="../assets/logo.png" alt="" class="w-32">
+    <a href="index.html"><img src="../assets/logo.png" alt="" class="w-32"></a>
 
     <input type="checkbox" id="menu-toggle" class="peer hidden" />
     <nav class="hidden lg:flex items-center gap-8 text-[0.6rem] font-semibold tracking-widest text-[#ffff] 
-                        /* Style Mobile quand coché */
                         peer-checked:flex flex-col lg:flex-row 
                         absolute lg:static top-full left-0 w-full lg:w-auto 
                         bg-[#991b1b] lg:bg-transparent p-6 lg:p-0 z-50">
@@ -53,66 +52,72 @@
   </header>
 
   <main>
-    <section class="max-w-6xl mx-auto px-4 sm:px-6 pt-14 pb-10">
-      <div class="text-center">
-        <div class="flex justify-center items-center gap-3 text-[11px] font-bold tracking-widest text-stone-600">
-          <span class="h-px w-10 bg-red-700"></span>
-          <span>WRITING</span>
-          <span class="h-px w-10 bg-red-700"></span>
+    <header class="max-w-6xl mx-auto px-4 sm:px-6 pt-14 pb-10 text-center">
+      <div class="flex justify-center items-center gap-3 text-[11px] font-bold tracking-widest text-stone-600">
+        <span class="h-px w-10 bg-[#b91c1c]"></span>
+        <span>WRITING</span>
+        <span class="h-px w-10 bg-[#b91c1c]"></span>
+      </div>
+      <h1 class="mt-6 text-5xl md:text-6xl">The <i class="text-[#b91c1c]">blog</i></h1>
+      <p class="mt-4 text-sm text-stone-600 max-w-xl mx-auto">Thoughts on teaching, software engineering, and
+        everything in between.</p>
+    </header>
+
+    <div class="flex flex-col gap-10 md:flex-row md:gap-10 p-10 bg-[#ffff]">
+      <div class="md:w-[75%]">
+        <section id="postsList" class="grid gap-6"></section>
+        <div id="pagination" class="mt-10"></div>
+      </div>
+
+      <aside class="md:w-[30%] flex flex-col gap-6">
+
+        <div class="bg-[#f0ece45c] rounded-lg p-5 flex flex-col gap-5 ">
+          <div class="flex gap-2 items-center text-[0.6rem] font-semibold text-[#a8a29e] uppercase">
+            <hr class="w-5 border border-[#b91c1c] "><span>Archives</span>
+          </div>
+          <div id="archivesList" class=""></div>
         </div>
-        <h1 class="mt-6 text-5xl md:text-6xl font-serif text-slate-900">The blog</h1>
-        <p class="mt-4 text-sm text-stone-600 max-w-xl mx-auto">Thoughts on teaching, software engineering, and
-          everything in between.</p>
-      </div>
-    </section>
 
-    <section class="max-w-6xl mx-auto px-4 sm:px-6 pb-16">
-      <div class="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-10 items-start">
-        <div id="postsList" class="grid gap-6"></div>
-
-        <aside class="grid gap-6">
-          <div class="rounded-xl bg-white/85 border border-stone-200/70 p-6 shadow-sm">
-            <div class="text-[11px] tracking-widest uppercase text-stone-500">Archives</div>
-            <div id="archivesList" class="mt-4"></div>
+        <form class="bg-[#f0ece45c] rounded-lg p-5 flex flex-col gap-5 " onsubmit="return false;">
+          <div class="flex gap-2 items-center text-[0.6rem] font-semibold text-[#a8a29e] uppercase">
+            <hr class="w-5 border border-[#b91c1c] "><span>Newsletter</span>
           </div>
 
-          <div class="rounded-xl bg-white/85 border border-stone-200/70 p-6 shadow-sm">
-            <div class="text-[11px] tracking-widest uppercase text-stone-500">Newsletter</div>
-            <div class="mt-4 text-sm text-stone-600">Get new articles straight to your inbox. No spam, ever.</div>
-            <div class="mt-4 grid gap-3">
-              <input class="bg-white/70 border border-stone-200/70 rounded-lg px-3 py-2 text-sm outline-none"
-                type="email" placeholder="your@email.com">
-              <button
-                class="bg-red-700 hover:bg-red-800 text-white text-sm font-semibold px-4 py-2 rounded-lg">Subscribe</button>
-            </div>
-          </div>
+          <p>Get new articles straight to your inbox. No spam, ever.</p>
 
-          <div class="rounded-xl bg-white/85 border border-stone-200/70 p-6 shadow-sm">
-            <div class="text-[11px] tracking-widest uppercase text-stone-500">On YouTube</div>
-            <div id="youtubeList" class="mt-4 grid gap-4"></div>
-            <div class="mt-4">
-              <a class="text-[11px] font-bold tracking-widest uppercase text-red-800 hover:underline"
-                href="https://www.youtube.com/" target="_blank" rel="noreferrer">View all videos <span
-                  aria-hidden="true">→</span></a>
-            </div>
+          <input id="subscribeEmail" type="email" placeholder="your@email.com"
+            class="border-[1.5px] border-[#e5e0d8] px-3 py-1 outline-none rounded-md placeholder:text-[0.7rem] placeholder:text-[#a8a29e] placeholder:font-semibold text-[0.7rem] text-[#a8a29e] font-semibold">
+
+          <button id="subscribeBtn"
+            class="border-[1.5px] border-[#b91c1c] bg-[#b91c1c] text-[0.7rem] text-[#ffffff] rounded-md px-4 py-2 hover:bg-[#7f1d1d] hover:border-[#7f1d1d] duration-300 uppercase">Subscribe</button>
+        </form>
+
+        <div class="bg-[#f0ece45c] rounded-lg p-5 flex flex-col gap-5">
+          <div class="flex gap-2 items-center text-[0.6rem] font-semibold text-[#a8a29e] uppercase">
+            <hr class="w-5 border border-[#b91c1c] "><span>on youtube</span>
           </div>
-        </aside>
-      </div>
-    </section>
+          <p>Latest video from the channel</p>
+          <div id="youtubeList" class="grid gap-[0.5vh]"></div>
+
+          <a class="underline text-[#b91c1c] text-[1rem] font-semibold hover:opacity-70 duration-300"
+            href="https://www.youtube.com" target="_blank" rel="noreferrer">View all videos <span
+              aria-hidden="true">→</span></a>
+
+        </div>
+      </aside>
+    </div>
 
   </main>
 
-  <footer class="bg-[#b91c1c] flex flex-col text-center items-center py-[5%] gap-5">
+  <footer class="bg-[#b91c1c] flex flex-col text-center items-center py-[5%] px-[5%] gap-5">
     <h2 class="text-[#ffffff] text-[2rem]">Want to go deeper?</h2>
     <p class="text-[#ffffff]">Book a free discovery call and find the course that fits your goals and
       schedule.</p>
     <div class="flex gap-3">
-      <a href="contact.html"><button
-          class="border border-[#f0ece4] bg-[#f0ece4] px-5 py-2 font-semibold 
+      <a href="courses.html"><button class="border border-[#f0ece4] bg-[#f0ece4] px-5 py-2 font-semibold 
           text-[#b91c1c] rounded-3xl hover:bg-[#b91c1c] hover:text-[#ffff] duration-300">Explore
           courses</button></a>
-      <a href="contact.html"><button
-          class="border border-[#f0ece4] px-5 py-2 font-semibold 
+      <a href="contact.html"><button class="border border-[#f0ece4] px-5 py-2 font-semibold 
           text-[#f0ece4] rounded-3xl hover:bg-[#ffffff] hover:text-[#b91c1c] duration-300">Get
           in touch</button></a>
     </div>

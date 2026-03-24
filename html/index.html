@@ -14,7 +14,7 @@
 <body class="page-surface" data-page="home">
     <header id="pcNav"
         class="flex justify-between items-center sticky top-0 z-50 bg-[#991b1b] shadow-sm px-[1%] py-[0.6%]">
-        <img src="../assets/logo.png" alt="" class="w-32">
+        <a href="index.html"><img src="../assets/logo.png" alt="" class="w-32"></a>
 
         <input type="checkbox" id="menu-toggle" class="peer hidden" />
         <nav class="hidden lg:flex items-center gap-8 text-[0.6rem] font-semibold tracking-widest text-[#ffff] 
@@ -74,14 +74,14 @@
                         researchand multilingual expertise </p>
 
                     <div class="flex gap-3">
-                        <a href=""><button
+                        <a href="courses.html"><button
                                 class="border-[1.5px] border-[#b91c1c] bg-[#b91c1c] text-[0.7rem] text-[#ffffff] rounded-md px-4 py-2 hover:bg-[#7f1d1d] hover:border-[#7f1d1d] duration-300">Book
                                 a course</button></a>
                         <a href="#about"><button
                                 class="border-[1.5px] border-[#e5e0d8] text-[0.7rem] rounded-md px-4 py-2 hover:border-[#1a1a1a] duration-300">About
                                 me</button></a>
                     </div>
-                    <a href=""
+                    <a href="contact.html"
                         class="underline text-[#b91c1c] text-[0.6rem] font-semibold hover:opacity-70 duration-300">ASK
                         FOR A COLLABORATION
                         →</a>
@@ -133,7 +133,7 @@
             </article>
         </section>
 
-        <section id="courses" class="px-[20%] py-[5%] flex flex-col items-center gap-10">
+        <section id="courses" class=" md:px-[20%] py-[5%] flex flex-col items-center gap-10">
             <header class="flex flex-col items-center text-center">
                 <div class="flex items-center gap-2 text-[0.6rem] font-semibold text-[#a8a29e]">
                     <hr class="w-5 border border-[#b91c1c]"><span>LEARNING</span>
@@ -144,12 +144,12 @@
 
             <div id="homeCourses" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
 
-            <a href="" class="underline text-[#b91c1c] text-[0.6rem] font-semibold hover:opacity-70 duration-300">VIEW
+            <a href="courses.html" class="underline text-[#b91c1c] text-[0.6rem] font-semibold hover:opacity-70 duration-300">VIEW
                 ALL COURSES
                 →</a>
         </section>
 
-        <section id="experience" class="px-[20%] py-[5%] flex flex-col gap-10 bg-[#ffffff]">
+        <section id="experience" class="px-[5%] md:px-[20%] py-[5%] flex flex-col gap-10 bg-[#ffffff]">
             <header>
                 <div class="flex gap-2 items-center text-[0.6rem] font-semibold text-[#a8a29e]">
                     <hr class="w-5 border border-[#b91c1c]"><span>BACKGROUND</span>
@@ -170,13 +170,9 @@
                 in touch</button></a>
     </footer>
 
-    <!-- Données du site (textes, cours, etc.) -->
     <script src="../tokimahery.data.js"></script>
-    <!-- JavaScript partagé (navigation, panier, menu mobile…) -->
     <script src="../script/common.js"></script>
-    <!-- Contenu dynamique de la page d’accueil uniquement -->
     <script src="../script/page-home.js"></script>
-    <!-- Point d’entrée : choisit quoi exécuter selon l’attribut data-page sur la balise body -->
     <script src="../script/main.js"></script>
 </body>
 
