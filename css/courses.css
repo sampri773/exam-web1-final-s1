@@ -17,4 +17,17 @@
 .dual-range-stack input[type="range"]{
   display: block;
 }
+.abso {
+  position: absolute;
+  top: 8.7rem;
+  left: 10.45rem;
+  background-color: #0bf52a; /* couleur jaune orangée */
+  color: white;
+  font-size: 10px; /* py-1 px-2.5 */ /* équivalent à rounded-full */
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+.color{
+  background-color: black;
+}
 

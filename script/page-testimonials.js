@@ -5,55 +5,82 @@
  */
 
 function renderTestimonials() {
-  let grid = $("#testimonialsGrid");
-  if (!grid || !Array.isArray(data.testimonials)) return;
+  let sectionsRoot = $("#testimonialsSections");
+  if (!sectionsRoot || !Array.isArray(data.testimonials)) return;
 
-  clearElement(grid);
+  clearElement(sectionsRoot);
 
-  for (let i = 0; i < data.testimonials.length; i++) {
-    let t = data.testimonials[i];
-    let card = document.createElement("div");
-    card.className =
-      "rounded-xl bg-white/85 border border-stone-200/70 p-6 shadow-sm";
+  let roleConfig = [
+    { key: "student", title: "STUDENTS", columnsClass: "testimonials-grid--students" },
+    { key: "collaborator", title: "COLLABORATORS", columnsClass: "testimonials-grid--collaborators" },
+    { key: "customer", title: "CUSTOMERS", columnsClass: "testimonials-grid--customers" }
+  ];
 
-    let top = document.createElement("div");
-    top.className = "flex items-start justify-between gap-4";
+  for (let i = 0; i < roleConfig.length; i++) {
+    let role = roleConfig[i];
+    let items = data.testimonials.filter(function (t) {
+      return safeText(t.role).toLowerCase() === role.key;
+    });
+    if (items.length === 0) continue;
 
-    let stars = document.createElement("div");
-    stars.className = "text-red-700 text-xs tracking-widest";
-    stars.textContent = "★".repeat(t.rating || 0);
+    let section = document.createElement("section");
+    section.className = "testimonial-role-block";
 
-    let role = document.createElement("div");
-    role.className =
-      "text-[11px] tracking-widest uppercase text-stone-500";
-    role.textContent = safeText(t.role);
+    let heading = document.createElement("h2");
+    heading.className = "testimonial-role-title";
+    heading.textContent = role.title;
+    section.appendChild(heading);
 
-    top.appendChild(stars);
-    top.appendChild(role);
+    let grid = document.createElement("div");
+    grid.className = "testimonials-grid " + role.columnsClass;
 
-    let desc = document.createElement("div");
-    desc.className = "text-sm text-stone-700 mt-4 leading-relaxed";
-    desc.textContent = '"' + safeText(t.description) + '"';
+    for (let j = 0; j < items.length; j++) {
+      let t = items[j];
+      let card = document.createElement("article");
+      card.className = "testimonial-card testimonial-card--" + role.key;
 
-    let authorRow = document.createElement("div");
-    authorRow.className = "flex items-center gap-3 mt-6";
+      let quote = document.createElement("p");
+      quote.className = "testimonial-quote";
+      quote.textContent = safeText(t.description);
 
-    let img = document.createElement("img");
-    img.src = safeText(t.thumbnail);
-    img.alt = "";
-    img.className =
-      "w-10 h-10 rounded-full object-cover border border-stone-200";
+      let authorRow = document.createElement("div");
+      authorRow.className = "testimonial-author-row";
 
-    let authorName = document.createElement("div");
-    authorName.className = "text-sm font-semibold text-slate-900";
-    authorName.textContent = safeText(t.author);
+      let img = document.createElement("img");
+      img.src = safeText(t.thumbnail);
+      img.alt = "";
+      img.className = "testimonial-avatar";
 
-    authorRow.appendChild(img);
-    authorRow.appendChild(authorName);
+      let authorCol = document.createElement("div");
+      authorCol.className = "testimonial-author-col";
 
-    card.appendChild(top);
-    card.appendChild(desc);
-    card.appendChild(authorRow);
-    grid.appendChild(card);
+      let authorName = document.createElement("p");
+      authorName.className = "testimonial-author-name";
+      authorName.textContent = safeText(t.author);
+
+      let roleText = document.createElement("p");
+      roleText.className = "testimonial-author-role";
+      roleText.textContent = role.key;
+
+      authorCol.appendChild(authorName);
+      authorCol.appendChild(roleText);
+      authorRow.appendChild(img);
+      authorRow.appendChild(authorCol);
+
+      card.appendChild(quote);
+      card.appendChild(authorRow);
+
+      if (role.key === "student") {
+        let stars = document.createElement("div");
+        stars.className = "testimonial-stars";
+        stars.textContent = "★".repeat(Number(t.rating) || 0);
+        card.appendChild(stars);
+      }
+
+      grid.appendChild(card);
+    }
+
+    section.appendChild(grid);
+    sectionsRoot.appendChild(section);
   }
 }

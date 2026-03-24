@@ -1,2 +1,131 @@
 @import url("./base.css");
 
+#testimonialsSections {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+.testimonial-role-block {
+  width: 100%;
+}
+
+.testimonial-role-title {
+  margin: 0 0 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.56rem;
+  letter-spacing: 0.22em;
+  color: #78716c;
+}
+
+.testimonial-role-title::before {
+  content: "";
+  width: 1.7rem;
+  height: 1px;
+  background: #991b1b;
+}
+
+.testimonials-grid {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.testimonials-grid--students {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.testimonials-grid--collaborators,
+.testimonials-grid--customers {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.testimonial-card {
+  border-radius: 0.75rem;
+  border: 1px solid rgba(229, 224, 216, 0.95);
+  background: rgba(255, 255, 255, 0.82);
+  padding: 1rem 1.05rem;
+  min-height: 11rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.testimonial-quote {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: #44403c;
+}
+
+.testimonial-card--collaborator .testimonial-quote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.02rem;
+  line-height: 1.18;
+  color: #57534e;
+}
+
+.testimonial-author-row {
+  margin-top: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.testimonial-avatar {
+  width: 1.65rem;
+  height: 1.65rem;
+  border-radius: 999px;
+  object-fit: cover;
+  border: 1px solid rgba(229, 224, 216, 0.9);
+  flex-shrink: 0;
+}
+
+.testimonial-author-col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.testimonial-author-name {
+  margin: 0;
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: #292524;
+}
+
+.testimonial-author-role {
+  margin: 0.08rem 0 0;
+  font-size: 0.52rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #a8a29e;
+}
+
+.testimonial-stars {
+  margin-top: 0.75rem;
+  color: #b91c1c;
+  letter-spacing: 0.12em;
+  font-size: 0.66rem;
+}
+
+@media (max-width: 1024px) {
+  .testimonials-grid--students {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  #testimonialsSections {
+    gap: 2.4rem;
+  }
+
+  .testimonials-grid--students,
+  .testimonials-grid--collaborators,
+  .testimonials-grid--customers {
+    grid-template-columns: 1fr;
+  }
+}
+

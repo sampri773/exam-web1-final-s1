@@ -137,7 +137,7 @@ function buildCourseCard(c) {
   img.className = "w-full h-44 object-cover";
 
   let badges = document.createElement("div");
-  badges.className = "absolute top-3 left-3 flex gap-2";
+  badges.className = "absolute top-3 left-3 flex gap-2 jutify-center items-center";
 
   let bLang = document.createElement("span");
   bLang.className =
@@ -146,7 +146,16 @@ function buildCourseCard(c) {
 
   let bLevel = document.createElement("span");
   bLevel.className =
-    "pill rounded-full px-2.5 py-1 text-[10px] tracking-widest uppercase text-stone-600";
+    "abso pill px-2.5 py-1 text-[10px] tracking-widest uppercase text-stone-600 text-white";
+  if(c.level== "beginner"){
+    bLevel.style.backgroundColor = "#0bf52a";
+  }else if(c.level == "intermediate"){
+    
+    bLevel.style.backgroundColor = "#f5c20b";
+  }else{
+    bLevel.style.backgroundColor = "red";
+
+  }
   bLevel.textContent = safeText(c.level);
 
   badges.appendChild(bLang);
@@ -171,12 +180,12 @@ function buildCourseCard(c) {
   price.textContent = formatMGA(c.price);
 
   let pills = document.createElement("div");
-  pills.className = "mt-4 flex flex-wrap gap-2";
+  pills.className = " flex flex-wrap gap-2";
   let techList = (c.technologies || []).slice(0, 3);
   for (let i = 0; i < techList.length; i++) {
     let pill = document.createElement("span");
     pill.className =
-      "pill rounded-full px-2.5 py-1 text-[10px] tracking-widest uppercase text-stone-600";
+      " color text-white pill rounded-full px-2.5 py-1 text-[10px] tracking-widest uppercase text-stone-600";
     pill.textContent = safeText(techList[i]);
     pills.appendChild(pill);
   }
@@ -202,9 +211,9 @@ function buildCourseCard(c) {
   actions.appendChild(btn);
 
   body.appendChild(title);
-  body.appendChild(desc);
   body.appendChild(price);
-  body.appendChild(pills);
+  body.appendChild(desc);
+  badges.appendChild(pills);
   body.appendChild(actions);
 
   root.appendChild(imgWrap);
