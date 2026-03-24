@@ -28,7 +28,6 @@ body{
 .font-serif{ font-family: var(--font-serif); }
 .text-muted{ color: var(--color-muted); }
 
-/* Subtle grain-ish background like the reference */
 .page-surface{
   background:
     radial-gradient(1200px 400px at 70% 20%, rgba(185,28,28,.06), transparent 60%),
@@ -36,7 +35,7 @@ body{
     var(--color-bg-warm);
 }
 
-/* Header underline animation (matches the reference feel) */
+
 .nav-link{
   position: relative;
   display: inline-flex;
@@ -63,22 +62,17 @@ body{
   opacity: 1;
 }
 
-/* Small “pill” tags */
 .pill{
   border: 1px solid rgba(229,224,216,.9);
   background: rgba(255,255,255,.7);
   backdrop-filter: blur(6px);
 }
 
-/* Footer red blocks */
+
 .cta-band{
   background: var(--color-red-dark);
   color: #fff;
 }
-
-/* -------------------------------------------------------------------------- */
-/* Panier (fenêtre flottante) + toast de commande                             */
-/* -------------------------------------------------------------------------- */
 
 .cart-modal-overlay{
   position: fixed;

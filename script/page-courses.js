@@ -12,9 +12,6 @@ function parseQuery() {
   };
 }
 
-/**
- * Remplit la liste « Technology » à partir des cours (sans innerHTML sur le conteneur parent).
- */
 function fillTechSelect(techSelect) {
   if (!techSelect || !Array.isArray(data.courses)) return;
 

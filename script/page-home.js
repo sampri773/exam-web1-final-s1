@@ -1,11 +1,3 @@
-/**
- * =============================================================================
- * page-home.js — Contenu dynamique pour la page d’accueil (index.html)
- * =============================================================================
- * Les textes et listes viennent de l’objet global `data` (tokimahery.data.js).
- * On construit le HTML avec createElement + textContent (pas innerHTML).
- */
-
 function renderHome() {
   let about1 = $("#aboutPart1");
   let about2 = $("#aboutPart2");

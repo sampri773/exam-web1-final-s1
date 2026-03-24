@@ -1,11 +1,3 @@
-/**
- * =============================================================================
- * main.js — Point d’entrée : lance le code commun puis la page courante
- * =============================================================================
- * Chaque fichier HTML a un attribut data-page sur <body> (ex. data-page="home").
- * On appelle la fonction qui correspond à cette page, si elle existe.
- */
-
 document.addEventListener("DOMContentLoaded", function () {
   initCommon();
 

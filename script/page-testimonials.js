@@ -1,9 +1,3 @@
-/**
- * =============================================================================
- * page-testimonials.js — Grille des témoignages (testimonials.html)
- * =============================================================================
- */
-
 function renderTestimonials() {
   let sectionsRoot = $("#testimonialsSections");
   if (!sectionsRoot || !Array.isArray(data.testimonials)) return;

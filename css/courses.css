@@ -1,6 +1,5 @@
 @import url("./base.css");
 
-/* Double curseur prix (deux pistes comme sur la maquette) */
 .course-range{
   accent-color: var(--color-red);
   height: 6px;
@@ -21,9 +20,9 @@
   position: absolute;
   top: 8.7rem;
   left: 10.45rem;
-  background-color: #0bf52a; /* couleur jaune orangée */
+  background-color: #0bf52a; 
   color: white;
-  font-size: 10px; /* py-1 px-2.5 / / équivalent à rounded-full */
+  font-size: 10px; 
   text-transform: uppercase;
   letter-spacing: 0.2em;
 }
@@ -31,7 +30,6 @@
   background-color: black;
 }
 
-/* Tablet + mobile only: keep desktop design untouched */
 @media (max-width: 1279px) {
   body[data-page="courses"] main section:nth-of-type(2) .flex.flex-col {
     align-items: stretch;

@@ -1,12 +1,3 @@
-/**
- * =============================================================================
- * page-contact.js — Formulaire de contact / collaboration (contact.html)
- * =============================================================================
- * Ici on intercepte l’envoi du formulaire pour éviter le rechargement de la page
- * et afficher un message de confirmation (démo sans serveur).
- * Pour un vrai envoi par e-mail, il faudrait un backend (PHP, Node, etc.).
- */
-
 function initContactPage() {
   let form = $("#contactForm");
   let feedback = $("#contactFeedback");

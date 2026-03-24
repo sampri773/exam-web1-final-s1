@@ -1,17 +1,3 @@
-/**
- * =============================================================================
- * common.js — Code JavaScript PARTAGÉ par toutes les pages du site
- * =============================================================================
- * Ce fichier contient les fonctions utilisées partout : navigation, panier,
- * recherche, menu mobile, etc. Chaque page charge ce fichier en premier,
- * puis un fichier spécifique (par ex. page-home.js) si besoin.
- */
-
-/* -----------------------------------------------------------------------------
- * Petits raccourcis pour sélectionner des éléments dans le HTML (comme en jQuery)
- * $  = le PREMIER élément qui correspond au sélecteur CSS
- * $all = TOUS les éléments qui correspondent
- * ----------------------------------------------------------------------------- */
 function $(sel, root) {
   root = root || document;
   return root.querySelector(sel);
@@ -33,7 +19,6 @@ function formatMGA(value) {
   return "MGA " + value;
 }
 
-/** Prix pour le panier flottant (format « 120,000 Ar » comme sur la maquette). */
 function formatCartAr(value) {
   let n = Number(value);
   if (!Number.isFinite(n)) return "0 Ar";
@@ -46,28 +31,18 @@ function truncateCartTitle(title, maxLen) {
   return s.slice(0, maxLen - 1) + "\u2026";
 }
 
-/**
- * Convertit une valeur en chaîne sûre pour l’affichage (évite undefined/null).
- */
+
 function safeText(str) {
   return String(str == null ? "" : str);
 }
 
-/**
- * Enlève tous les enfants d’un élément (pour reconstruire le contenu sans innerHTML).
- */
+
 function clearElement(el) {
   while (el.firstChild) {
     el.removeChild(el.firstChild);
   }
 }
 
-/* =============================================================================
- * PANIER (stocké dans le navigateur avec localStorage)
- * Le panier persiste quand l’utilisateur revient sur le site.
- * ============================================================================= */
-
-/** Lit le panier depuis le stockage local ; renvoie un tableau vide si erreur. */
 function getCart() {
   try {
     return JSON.parse(localStorage.getItem("cart") || "[]");
@@ -76,14 +51,12 @@ function getCart() {
   }
 }
 
-/** Enregistre le panier et met à jour le badge (petit nombre sur l’icône panier). */
 function setCart(items) {
   localStorage.setItem("cart", JSON.stringify(items));
   updateCartBadge();
   refreshCartModal();
 }
 
-/** Retire complètement un cours du panier (bouton poubelle). */
 function removeCartItem(courseId) {
   let cart = getCart().filter(function (c) {
     return c.id !== courseId;
@@ -91,7 +64,6 @@ function removeCartItem(courseId) {
   setCart(cart);
 }
 
-/** Affiche le nombre d’articles sur le badge du panier (desktop + mobile). */
 function updateCartBadge() {
   let badge = $("#cartCount");
   let badgeMobile = $("#cartCountMobile");
@@ -121,10 +93,6 @@ function addToCart(course) {
   else cart.push({ id: course.id, qty: 1, title: course.title, price: course.price });
   setCart(cart);
 }
-
-/* =============================================================================
- * PANIER : fenêtre « Your cart » + toast après commande
- * ============================================================================= */
 
 function setCartOpenExpanded(isOpen) {
   $all("[data-cart-open]").forEach(function (btn) {
@@ -377,9 +345,6 @@ function initCartModalAndToast() {
   });
 }
 
-/* =============================================================================
- * NAVIGATION : lien actif (soulignement / aria-current sur la page courante)
- * ============================================================================= */
 
 function setActiveNav() {
   let path = location.pathname.split("/").pop() || "index.html";
@@ -390,9 +355,6 @@ function setActiveNav() {
   });
 }
 
-/* =============================================================================
- * MENU MOBILE (bouton hamburger → ouvre/ferme le panneau)
- * ============================================================================= */
 
 function initMobileMenu() {
   let btn = $("#mobileMenuBtn");
@@ -403,9 +365,6 @@ function initMobileMenu() {
   });
 }
 
-/* =============================================================================
- * RECHERCHE GLOBALE (Entrée dans la barre → redirection vers cours avec ?q=...)
- * ============================================================================= */
 
 function initSearchRedirect() {
   let input = $("#globalSearch");
@@ -420,10 +379,6 @@ function initSearchRedirect() {
   });
 }
 
-/**
- * À appicher au chargement de CHAQUE page : navigation, menu, recherche, badge panier.
- * Les pages spécifiques appellent ensuite leur propre fonction (ex. renderHome).
- */
 function initCommon() {
   setActiveNav();
   initMobileMenu();

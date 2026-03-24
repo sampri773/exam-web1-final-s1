@@ -1,8 +1,3 @@
-/**
- * =============================================================================
- * page-research.js — Liste des publications (research.html)
- * =============================================================================
- */
 
 function renderResearch(papers = []) {
   const container = document.querySelector("#papersList");
